@@ -56,3 +56,62 @@ develop edit = 개발자 코드만 디버그(엔진단 제외 디버그)
 develop = 개발자코드만 디버그 exe파일 만들어서
 
 C++작업시 gameFramework/ 밑에 헤더를 선언해야 컴파일 됨
+
+//
+1.디아블로, 로스트 아크 같은 rpg게임의 카메라 뷰
+character Pawn
+	Use Controller Rtation Pitch X
+	Use Controller Rtation Yaw  X
+	Use Controller Rtation Roll  X
+
+SpringArm
+	회전 세팅 (원하는 대로)
+	Camera Setting - Use Pawn Control Rotation X
+		        - Inherit Yaw,pitch,Roll X
+
+CaracterMovement
+	RoationSetting
+		Orient Rotation to Movement O(use)
+
+//
+2. 배틀그라운드 스타일
+character Pawn
+	Use Controller Rtation Pitch X
+	Use Controller Rtation Yaw  O
+	Use Controller Rtation Roll  X
+
+SpringArm
+	위치 Y, Z 변경
+	TargetArm Length 조절(150)
+	회전 세팅 (원하는 대로)
+	Camera Setting - Use Pawn Control Rotation O
+		        - Inherit Yaw,pitch, O  Roll X 
+
+CaracterMovement
+	RoationSetting
+		Orient Rotation to Movement X
+
+//
+3. 다른 스타일(진삼국무쌍, 툼레이더)
+character Pawn
+	Use Controller Rtation Pitch X
+	Use Controller Rtation Yaw  X
+	Use Controller Rtation Roll  X
+
+SpringArm
+	위치 Y, Z 변경
+	TargetArm Length 조절(150)
+	회전 세팅 (원하는 대로)
+	Camera Setting - Use Pawn Control Rotation O
+		        - Inherit Yaw,pitch, O  Roll X 
+
+CaracterMovement
+	RoationSetting
+		Use Controller Desire Rotation O
+		Orient Rotation to Movement  O(use)
+
+//
+
+애님 노티파이 만드는 방법은 노티파이 추가 후에 애니메이션 블루프린트에서 호출 가능
+만약 다른곳에서 호출하고 싶으면 따로 블루프린트를 추가하되 animnotipy를 상속받아 만든다.(그럼 다른곳에서 호출가능)
+
