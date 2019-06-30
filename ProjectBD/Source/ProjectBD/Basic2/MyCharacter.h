@@ -32,4 +32,11 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	class UCameraComponent* Camera;
 
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "State")
+	float CurrentHP;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "State")
+	float MaxHP = 100.0f;
+
 };

@@ -27,7 +27,8 @@ AMyCharacter::AMyCharacter()
 void AMyCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	CurrentHP = MaxHP;
 }
 
 // Called every frame

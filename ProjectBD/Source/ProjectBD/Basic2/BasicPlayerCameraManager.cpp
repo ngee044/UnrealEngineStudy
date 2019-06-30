@@ -4,6 +4,7 @@
 #include "BasicPlayerCameraManager.h"
 #include "Basic2/BaiscPlayerController.h"
 #include "Basic2/MyPlayer.h"
+#include "GameFramework/SpringArmComponent.h"
 
 ABasicPlayerCameraManager::ABasicPlayerCameraManager()
 {
@@ -18,16 +19,18 @@ void ABasicPlayerCameraManager::BeginPlay()
 void ABasicPlayerCameraManager::UpdateCamera(float DeltaTime)
 {
 
-	ABaiscPlayerController *pPlayerCnt = Cast<ABaiscPlayerController>(GetOwningPlayerController());
+	ABaiscPlayerController *pPlayerController = Cast<ABaiscPlayerController>(GetOwningPlayerController());
 
-	if (pPlayerCnt)
+	if (pPlayerController)
 	{
-		AMyPlayer *Pawn = Cast<AMyPlayer>(pPlayerCnt->GetPawn());
+		AMyPlayer *Pawn = Cast<AMyPlayer>(pPlayerController->GetPawn());
 		if(Pawn)
 		{
 			float TargetFOV = Pawn->bIronsight ? IronsightFOV : NormalIFOV;
-			
 			SetFOV(FMath::FInterpTo(GetFOVAngle(), TargetFOV, DeltaTime, 15.0f));
+			
+			FVector TargetPosition = Pawn->bIsCrouched ? Pawn->CrouchedSpringArmPosition : Pawn->NormalSpringArmPosition;
+			Pawn->SetSpringArmPosition(FMath::VInterpTo(Pawn->GetSpringArmPosition(), TargetPosition, DeltaTime, 5.0f));
 		}
 	}
 
